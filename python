@@ -1,0 +1,46 @@
+from collections import deque
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        s_list = list(s)
+        
+        # Thay đổi từng phần tử trong danh sách
+        for i in range(len(s_list)):
+            if s_list[i] == "(":
+                s_list[i] = "0"
+            else:
+                s_list[i] = "1"
+        print(s)
+        queue = deque()
+        rs = []
+        # Thêm từng ký tự của chuỗi vào hàng đợi
+        for char in s_list:
+            queue.append(char)
+        print(queue)
+        # Duyệt qua từng phần tử của hàng đợi
+        while queue:
+            a = queue.popleft()
+            
+            # Kiểm tra điều kiện để thêm vào rs
+            if not rs :
+                if a=="0":
+                    rs.append(a)
+            else:
+                if a=="0" and rs[-1]=="1":
+                    rs.append(a)
+
+             
+
+                elif rs and rs[-1] == "0" and a == "1":
+                   
+                    rs.append(a)
+               
+        if len(rs)>=2:
+            return len(rs)
+        else:
+            return 0
+
+
+s="()(())" #010011
+a=Solution()
+b=a.longestValidParentheses(s)
+print(b)
